@@ -1,0 +1,205 @@
+[nitpick.meta]
+name = "Flake8"
+url = "https://github.com/PyCQA/flake8"
+
+[nitpick.files.present]
+"setup.cfg" = "Create the file with the contents below"
+
+# TODO(phuongfi91): We prefer .flake8 file over setup.cfg for flake8
+#[nitpick.files.".flake8"]
+[nitpick.files."setup.cfg"]
+comma_separated_values = [
+    "flake8.ignore",
+    "flake8.extend-ignore",
+    "flake8.exclude",
+    "flake8.per-file-ignores",
+]
+
+
+
+# We use flake8 linter to get some opionated linting rules from Wemake Python Styleguide:
+# https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/index.html
+#
+# We shall disable all the flake8 rules that are already covered by Ruff:
+# https://docs.astral.sh/ruff/faq/#how-does-ruffs-linter-compare-to-flake8
+#
+# The Flake8 configuration syntax can be found here:
+# https://flake8.pycqa.org/en/latest/user/configuration.html
+#
+# Wemake Python Styleguide congifuration:
+# https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/configuration.html
+#
+# Wemake Django cookiecutter template:
+# Reference: https://github.com/wemake-services/wemake-django-template/blob/master/%7B%7Bcookiecutter.project_name%7D%7D/setup.cfg
+#
+# Wemake Python Styleguide vs Ruff story:
+# https://github.com/astral-sh/ruff/issues/8022
+
+["setup.cfg".flake8]
+format = "wemake"
+show-source = true
+statistics = false
+doctests = true
+enable-extensions = "G"
+
+# Flake plugins:x
+max-line-length = 88
+max-complexity = 6
+
+# TODO(phuongfi91): Install and try out this plugin
+# flake8-noqa
+# not sure if we benefit this plugin?
+# noqa-include-name = true
+
+# Excluding some directories:
+exclude = """
+.git,\
+__pycache__,\
+.venv,\
+.eggs,\
+*.egg"""
+
+
+
+# Default ignore:
+# D100: Checks for undocumented public module definitions.
+# D104: Checks for undocumented public package definitions.
+# D106: Checks for undocumented public class definitions, for nested classes.
+# D401: Checks for docstring first lines that are not in an imperative mood.
+# X100: ???
+# W504: Line break occurred after a binary operator
+ignore = """
+D100,\
+D104,\
+D106,\
+D401,\
+X100,\
+W504"""
+
+
+# *** DISABLING FLAKE8 RULES THAT RUFF ALREADY COVERS: ***
+# Ruff defaults to double quotes:
+inline-quotes = "double"
+
+# * 'wemake-python-styleguide' and other disablements: *
+#
+# WPS110: Certain names are blacklisted for not being expressive enough
+#   However, context matters. We shouldn't pollute our code with overly verbose names
+# WPS111: Deeming any variable with "Too short name < X letter" is dogmatic,
+#   flexibility in naming is important for readability and maintainability
+# WPS111: UnderscoredNumberNameViolation: Forbid names with underscored numbers pattern.
+#   The rule is rather subjective which dictates an ugly naming pattern -> disable
+# WPS332: Forbidding new Python walrus operator for being hard to read is stupid
+# TODO(phuongfi91): Try to understand how WPS410 now works https://github.com/wemake-services/wemake-python-styleguide/issues/3060
+# WPS410: Module level metadata such as __all__ should be allowed, this rule is non-sense
+# WPS602: Forbidding @staticmethod decorator is just limiting how code can be organized
+#
+#
+# * some disablements which conflicts with Ruff: *
+#
+# WPS300: Relative import is fine as long as its sibling import. Prefer ruff's TID252 over this
+# WPS426: Late-binding in loop isn't a problem, since it's already spotted by Ruff's B023
+#
+# W503, W504: pydocstyle "(W503) line break before binary operator" and "W504 line break are binary operator" are not good rules if the formatter (human or ruff) splits the typing annotations to multiline
+#   and this rule does not seem to make an exception when the line is too long or it is about type annotations, for example here:
+# ```python
+#   input_sample: dict[
+#                 str,
+#                 dict[str, int | str | bool]
+# complains -->   | dict[str, dict[str, dict[str, int | float | str] | list[int]]]
+# complains -->   | dict[str, int | float | str],
+# ```
+#   It should actually give thumbs up for this kind of formatting as it's more readable, so lets disable these bastards:
+#
+# WPS122: Found all unused variables definition:
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/naming.html#wemake_python_styleguide.violations.naming.UnusedVariableIsDefinedViolation
+#   There does not seem to be consensus on this, f.ex. Pyright "reportUnusedCallResult" recommends the underscore, so we can disable this rule because we are not so opionated about this
+#
+# WPS412: Forbid logic inside __init__ module.
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/best_practices.html#wemake_python_styleguide.violations.best_practices.InitModuleHasLogicViolation
+#   This is a good rule in general but seemed to produce a false positive so not sure if it's working, so I disable it:
+#
+#  WPS102: Found incorrect module name pattern.
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/naming.html#wemake_python_styleguide.violations.naming.WrongModuleNamePatternViolation
+#   This causes false positive when using a python file as as script i.e. the file starts with `#!/usr/bin/env python` and is executable
+#   Ruff seems to understand that well and does not complain about this and seems to even notice if the file is not set as executable so disabling this rule:
+#
+# WPS324: Enforce consistent return statements.
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/consistency.html#wemake_python_styleguide.violations.consistency.InconsistentReturnViolation
+#   This is a good rule in general but seem to conflict with some other linters (e.g. SonarLint) in some cases
+extend-ignore = """
+WPS110,\
+WPS111,\
+WPS114,\
+WPS332,\
+WPS410,\
+WPS602,\
+WPS300,\
+WPS426,\
+W503,\
+W504,\
+WPS122,\
+WPS412,\
+WPS102,\
+WPS324"""
+
+
+# *** PER-FILE-IGNORES: ***
+# Docs: https://github.com/snoack/flake8-per-file-ignores
+# You can completely or partially disable our custom checks,
+# to do so you have to ignore `WPS` letters for all python files:
+
+# WPS116: Found consecutive underscores name
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/naming.html#wemake_python_styleguide.violations.naming.ConsecutiveUnderscoresInNameViolation
+#   As a general rule this is bad habit but in gherkin step implementation it's ok? to have this kind of naming :D
+# WPS118: Found too long name
+# WPS218: Found too many `assert` statements
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/complexity.html#wemake_python_styleguide.violations.complexity.TooManyAssertsViolation
+#   Well, tests are about asserts, everywhere else they are bad and should not be relied on prod optimized pythons
+# WPS432: Enable magic numbers for tests
+per-file-ignores = """
+tests/*.py:\
+    WPS116,\
+    WPS118,\
+    WPS218,\
+    WPS432"""
+
+# TODO(phuongfi91): Fix issue with multiline config value or validate that ConfigParser can work with array []
+#per-file-ignores = """
+#\n\
+#tests/*.py:\
+#    WPS116,\
+#    WPS118,\
+#    WPS218,\
+#    WPS432\n\
+#tests_path_2/*.py:\
+#    WPS116,\
+#    WPS118,\
+#    WPS218,\
+#    WPS432"""
+
+
+# *** WPS COMPLEXITY RULES RELAXATION: ***
+# They say here https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/complexity.html#wemake_python_styleguide.violations.complexity.TooManyLocalsViolation that
+#   """"
+#   We try to stick to "the magical 7 ± 2 number" when counting things. https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two
+#   That's how many objects we can keep in our memory at a time. We try hard not to exceed the memory capacity limit.
+#   """"
+# ...so we can relax some of the rules to 9, which is still within the magical 7 ± 2 number :D
+# Sometimes there are quickly hacked script that need the relaxation.
+# However now that Flake8 starts complaining about the complexity, we can take that seriously and refactor the code.
+max-module-members = 9
+max-module-expressions = 9
+max-function-expressions = 9
+max-local-variables = 9
+max-arguments = 9
+max-returns = 9
+max-methods = 9
+max-attributes = 9
+max-annotation-complexity = 4
+max-import-from-members = 9
+max-tuple-unpack-length = 9
+max-raises = 5
+# 'sonarlint' has this rule set as 4 so we can follow that for the sake of consistency:
+max-string-usages = 4
+max-try-body-length = 9

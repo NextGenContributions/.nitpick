@@ -1,0 +1,131 @@
+[nitpick.meta]
+name = "ruff"
+url = "https://github.com/astral-sh/ruff"
+
+[nitpick.files.present]
+".ruff.toml" = "Create the file with the contents below"
+
+
+# https://docs.astral.sh/ruff/configuration/
+[".ruff.toml"]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    # custom:
+    "out",
+    "typings",
+    ".pyre"
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+
+
+# https://docs.astral.sh/ruff/settings/#lint
+[".ruff.toml".lint]
+
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = ["ALL"]
+ignore = [
+  # Enforce removal of unused 'noqa' rule.
+  # https://docs.astral.sh/ruff/linter/?query=RUF100#disabling-fixes
+  # However ruff doesn't recognize some rules from other linters, better disable it:
+  "RUF100",
+  # When I ran ruff, got this:
+  # warning: The following rules may cause conflicts when used with the formatter: COM812, ISC001. To avoid unexpected behavior, we recommend disabling these rules, either by removing them from the select or extend-select configuration, or adding them to the `ignore` configuration.
+  # ...so:
+  "COM812",
+  "ISC001",
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided:
+fixable = ["ALL"]
+# When this is "ALL" and `--fix` is provided should we then put those rules in ignore
+# so they would not show up as no point to bother coders with them if they are auto-fixable?
+# Not sure if putting them in ignore would disable the auto-fixing? Somebody should figure out.
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+
+[".ruff.toml".lint.per-file-ignores]
+# Ignore assert usage in tests
+"tests/*.py" = ["S101"]
+
+
+[".ruff.toml".lint.pydocstyle]
+# Docstring conventions to enforce:
+# https://docs.astral.sh/ruff/settings/#lintpydocstyle
+# Whichever convention we use, we should be consistent with choosing the same for Darglint in our .flake8 file:
+# https://github.com/terrencepreilly/darglint?tab=readme-ov-file#darglint
+convention = "google"
+
+
+[".ruff.toml".lint.pycodestyle]
+# Relax line length checks with the task comments, they can be long.
+# https://docs.astral.sh/ruff/settings/#lint_pycodestyle_ignore-overlong-task-comments
+ignore-overlong-task-comments = true
+
+
+[".ruff.toml".format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# https://docs.astral.sh/ruff/settings/#format_docstring-code-format
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+# If we can make the docstrings any shorter by doing this lets do it:
+docstring-code-format = true
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+# https://docs.astral.sh/ruff/settings/#format_docstring-code-line-length
+#
+# I think this is good so it's in line with the other code:
+# "The default value for this setting is "dynamic", which has the effect of ensuring that any reformatted code examples in docstrings adhere to the global line length configuration that is used for the surrounding Python code. The point of this setting is that it takes the indentation of the docstring into account when reformatting code examples.". I am happy there is no line length linter for ruff.toml yet :D
+docstring-code-line-length = "dynamic"

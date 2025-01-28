@@ -1,0 +1,33 @@
+[nitpick.meta]
+name = "ruff"
+url = "https://github.com/astral-sh/ruff"
+
+[nitpick.files.present]
+".ruff.toml" = "Create the file with the contents below"
+
+
+[".ruff.toml".lint.per-file-ignores]
+# Don't touch Django migrations
+"**/migrations/*.py"    = ["ALL"]
+# No need to enforce docstrings in Django apps __init__.py files
+"src/**/__init__.py"    = ["D100","D104"]
+# Tasks might not have docstrings
+"src/**/tasks.py"       = ["D100"]
+# Django's basic files might not need docstrings as Django documentation is good enough (most of the time)
+"src/**/admin.py"       = ["D100","D101","D102","D103","D105","D106"]
+"src/**/apps.py"        = ["D100","D101","D102","D103","D105","D106"]
+"src/**/models.py"      = ["D100","D101","D102","D103","D105","D106"]
+"src/**/serializers.py" = ["D100","D101","D102","D103","D105","D106"]
+"src/**/urls.py"        = ["D100","D101","D102","D103","D105","D106"]
+"src/**/views.py"       = ["D100","D101","D102","D103","D105","D106"]
+"src/**/forms.py"       = ["D100","D101","D102","D103","D105","D106"]
+"src/**/mutations.py"   = ["D100","D101","D102","D103","D105","D106"]
+"src/**/schema.py"      = ["D100","D101","D102","D103","D105","D106"]
+# Django's advanced files might not need all docstrings:
+"src/**/managers.py"    = ["D100", "D101"] # django model manager files
+"src/**/filters.py"     = ["D100", "D101"] # django-filters filter files
+
+
+[".ruff.toml".lint.pyflakes]
+# https://docs.astral.sh/ruff/settings/#lint_pyflakes_extend-generics
+extend-generics = ["django.db.models.ForeignKey"]

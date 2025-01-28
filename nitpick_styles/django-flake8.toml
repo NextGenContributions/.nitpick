@@ -1,0 +1,34 @@
+[nitpick.meta]
+name = "Flake8"
+url = "https://github.com/PyCQA/flake8"
+
+[nitpick.files.present]
+"setup.cfg" = "Create the file with the contents below"
+
+# TODO(phuongfi91): We prefer .flake8 file over setup.cfg for flake8
+#[nitpick.files.".flake8"]
+[nitpick.files."setup.cfg"]
+comma_separated_values = [
+    "flake8.ignore",
+    "flake8.extend-ignore",
+    "flake8.exclude",
+    "flake8.per-file-ignores",
+]
+
+
+
+["setup.cfg".flake8.per-file-ignores]
+# TODO(phuongfi91): Fix issue with multiline config value or validate that ConfigParser can work with array []
+# **/settings/*.py: Allow `__init__.py` with logic for configuration:
+# **/migrations/*.py: Allow to have magic numbers inside migrations and wrong module names:
+per-file-ignores = """
+\n\
+**/settings/*.py:
+    WPS226,\
+    WPS407,\
+    WPS412,\
+    WPS432\n\
+**/migrations/*.py:
+    WPS102,\
+    WPS114,\
+    WPS432"""

@@ -1,0 +1,62 @@
+[nitpick.meta]
+name = "pre-commit hooks for any project"
+url = "https://github.com/pre-commit/pre-commit-hooks"
+
+# See https://pre-commit.com/hooks.html for more hooks
+
+[nitpick.files.present]
+".pre-commit-config.yaml" = "Create the file with the contents below, then run 'pre-commit install'"
+
+[".pre-commit-config.yaml"]
+exclude = '^docs/|/migrations/|devcontainer.json'
+fail_fast = false
+default_stages = ["pre-commit"]
+
+# nitpick pre-commit hook
+[[".pre-commit-config.yaml".repos]]
+repo = "https://github.com/NextGenContributions/nitpick"
+rev = "v0.35.0"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "nitpick-check"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "nitpick-fix"
+
+# Copied from https://github.com/cookiecutter/cookiecutter-django/blob/master/%7B%7Bcookiecutter.project_slug%7D%7D/.pre-commit-config.yaml:
+[[".pre-commit-config.yaml".repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v4.6.0"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "trailing-whitespace"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "end-of-file-fixer"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "check-toml"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "check-xml"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "check-yaml"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "check-builtin-literals"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "check-case-conflict"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "detect-private-key"
+
+# Copied from https://github.com/astral-sh/ruff-pre-commit?tab=readme-ov-file#using-ruff-with-pre-commit:
+[[".pre-commit-config.yaml".repos]]
+repo = "https://github.com/astral-sh/ruff-pre-commit"
+rev = "v0.4.9"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "ruff"
+args = ["--fix"]
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "ruff-format"
+
+# taplo pre-commit hooks
+[[".pre-commit-config.yaml".repos]]
+repo = "https://github.com/ComPWA/taplo-pre-commit"
+rev = "v0.9.3"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "taplo-format"
+[[".pre-commit-config.yaml".repos.hooks]]
+id = "taplo-lint"
