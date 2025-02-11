@@ -3,18 +3,15 @@ name = "Flake8"
 url = "https://github.com/PyCQA/flake8"
 
 [nitpick.files.present]
-"setup.cfg" = "Create the file with the contents below"
+".flake8" = "Create the file with the contents below"
 
-# TODO(phuongfi91): We prefer .flake8 file over setup.cfg for flake8
-#[nitpick.files.".flake8"]
-[nitpick.files."setup.cfg"]
-comma_separated_values = [
+[nitpick.files.comma_separated_values]
+".flake8" = [
     "flake8.ignore",
     "flake8.extend-ignore",
     "flake8.exclude",
     "flake8.per-file-ignores",
 ]
-
 
 
 # We use flake8 linter to get some opionated linting rules from Wemake Python Styleguide:
@@ -34,8 +31,7 @@ comma_separated_values = [
 #
 # Wemake Python Styleguide vs Ruff story:
 # https://github.com/astral-sh/ruff/issues/8022
-
-["setup.cfg".flake8]
+[".flake8".flake8]
 format = "wemake"
 show-source = true
 statistics = false
@@ -52,12 +48,13 @@ max-complexity = 6
 # noqa-include-name = true
 
 # Excluding some directories:
-exclude = """
-.git,\
-__pycache__,\
-.venv,\
-.eggs,\
-*.egg"""
+exclude = """\
+    .git,\
+    __pycache__,\
+    .venv,\
+    .eggs,\
+    *.egg\
+"""
 
 
 
@@ -68,13 +65,14 @@ __pycache__,\
 # D401: Checks for docstring first lines that are not in an imperative mood.
 # X100: ???
 # W504: Line break occurred after a binary operator
-ignore = """
-D100,\
-D104,\
-D106,\
-D401,\
-X100,\
-W504"""
+ignore = """\
+    D100,\
+    D104,\
+    D106,\
+    D401,\
+    X100,\
+    W504\
+"""
 
 
 # *** DISABLING FLAKE8 RULES THAT RUFF ALREADY COVERS: ***
@@ -127,56 +125,23 @@ inline-quotes = "double"
 # WPS324: Enforce consistent return statements.
 #   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/consistency.html#wemake_python_styleguide.violations.consistency.InconsistentReturnViolation
 #   This is a good rule in general but seem to conflict with some other linters (e.g. SonarLint) in some cases
-extend-ignore = """
-WPS110,\
-WPS111,\
-WPS114,\
-WPS332,\
-WPS410,\
-WPS602,\
-WPS300,\
-WPS426,\
-W503,\
-W504,\
-WPS122,\
-WPS412,\
-WPS102,\
-WPS324"""
+extend-ignore = """\
+    WPS110,\
+    WPS111,\
+    WPS114,\
+    WPS332,\
+    WPS410,\
+    WPS602,\
+    WPS300,\
+    WPS426,\
+    W503,\
+    W504,\
+    WPS122,\
+    WPS412,\
+    WPS102,\
+    WPS324\
+"""
 
-
-# *** PER-FILE-IGNORES: ***
-# Docs: https://github.com/snoack/flake8-per-file-ignores
-# You can completely or partially disable our custom checks,
-# to do so you have to ignore `WPS` letters for all python files:
-
-# WPS116: Found consecutive underscores name
-#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/naming.html#wemake_python_styleguide.violations.naming.ConsecutiveUnderscoresInNameViolation
-#   As a general rule this is bad habit but in gherkin step implementation it's ok? to have this kind of naming :D
-# WPS118: Found too long name
-# WPS218: Found too many `assert` statements
-#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/complexity.html#wemake_python_styleguide.violations.complexity.TooManyAssertsViolation
-#   Well, tests are about asserts, everywhere else they are bad and should not be relied on prod optimized pythons
-# WPS432: Enable magic numbers for tests
-per-file-ignores = """
-tests/*.py:\
-    WPS116,\
-    WPS118,\
-    WPS218,\
-    WPS432"""
-
-# TODO(phuongfi91): Fix issue with multiline config value or validate that ConfigParser can work with array []
-#per-file-ignores = """
-#\n\
-#tests/*.py:\
-#    WPS116,\
-#    WPS118,\
-#    WPS218,\
-#    WPS432\n\
-#tests_path_2/*.py:\
-#    WPS116,\
-#    WPS118,\
-#    WPS218,\
-#    WPS432"""
 
 
 # *** WPS COMPLEXITY RULES RELAXATION: ***
@@ -203,3 +168,26 @@ max-raises = 5
 # 'sonarlint' has this rule set as 4 so we can follow that for the sake of consistency:
 max-string-usages = 4
 max-try-body-length = 9
+
+
+
+# *** PER-FILE-IGNORES: ***
+# Docs: https://github.com/snoack/flake8-per-file-ignores
+# You can completely or partially disable our custom checks,
+# to do so you have to ignore `WPS` letters for all python files:
+
+[".flake8".flake8.per-file-ignores]
+# WPS116: Found consecutive underscores name
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/naming.html#wemake_python_styleguide.violations.naming.ConsecutiveUnderscoresInNameViolation
+#   As a general rule this is bad habit but in gherkin step implementation it's ok? to have this kind of naming :D
+# WPS118: Found too long name
+# WPS218: Found too many `assert` statements
+#   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/complexity.html#wemake_python_styleguide.violations.complexity.TooManyAssertsViolation
+#   Well, tests are about asserts, everywhere else they are bad and should not be relied on prod optimized pythons
+# WPS432: Enable magic numbers for tests
+"tests/*.py" = """\
+    WPS116,\
+    WPS118,\
+    WPS218,\
+    WPS432\
+"""

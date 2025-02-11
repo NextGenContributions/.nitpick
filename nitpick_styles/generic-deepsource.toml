@@ -1,0 +1,41 @@
+[nitpick.meta]
+name = "Deepsource"
+url = "https://docs.deepsource.com/docs/configuration"
+
+[nitpick.files.present]
+".deepsource.toml" = "Create the file with the contents below"
+
+
+[".deepsource.toml"]
+exclude_patterns = [
+  "*.egg",
+  "*.egg-info/**",
+  ".eggs/**",
+  ".git/**",
+  ".tox/**",
+  ".venv/**",
+  "__pycache__/**",
+  "bin/**",
+  "build/**",
+  "dist/**",
+]
+test_patterns = [
+  "test_*.py",
+  "tests/**",
+]
+version = 1
+
+[".deepsource.toml"."[analyzers]"]
+enabled = true
+name = "python"
+
+[".deepsource.toml".analyzers.meta]
+cyclomatic_complexity_threshold = "medium"
+max_line_length = 120 # should match this repo's config in e.g. pyproject.toml
+runtime_version = "3.x.x"
+skip_doc_coverage = ["init", "magic", "module"]
+type_checker = "mypy"
+
+[".deepsource.toml"."[transformers]"]
+enabled = true
+name = "ruff"
