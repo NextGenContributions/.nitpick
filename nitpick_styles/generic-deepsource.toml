@@ -31,7 +31,7 @@ name = "python"
 
 [".deepsource.toml".analyzers.meta]
 cyclomatic_complexity_threshold = "medium"
-max_line_length = 120 # should match this repo's config in e.g. pyproject.toml
+max_line_length = 88 # should match this repo's config in e.g. pyproject.toml
 runtime_version = "3.x.x"
 skip_doc_coverage = ["init", "magic", "module"]
 type_checker = "mypy"
