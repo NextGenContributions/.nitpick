@@ -1,0 +1,77 @@
+[nitpick.meta]
+name = "codacy"
+url = "https://docs.codacy.com/repositories-configure/codacy-configuration-file/"
+
+[nitpick.files.present]
+".codacy.yaml" = "Create the file with the contents below"
+
+
+
+# TODO(phuongfi91): Does 'codacy' works without this "---" line? Nitpick does not support adding this
+# ---
+
+# Python security analyzer
+[".codacy.yaml".engines.bandit]
+enabled = true
+
+# Docker linter
+[".codacy.yaml".engines.hadolint]
+enabled = true
+
+# Python static analysis tool
+[".codacy.yaml".engines.prospector]
+enabled = true
+
+# Python linter
+[".codacy.yaml".engines.pylintpython3]
+enabled = true
+
+# JSON linter
+[".codacy.yaml".engines.jacksonlinter]
+enabled = true
+
+# Markdown linter
+[".codacy.yaml".engines.markdownlint]
+enabled = true
+
+# Generic static analysis tool
+[".codacy.yaml".engines.semgrep]
+enabled = true
+
+# Shell script linter
+[".codacy.yaml".engines.shellcheck]
+enabled = true
+
+# JSON/YAML linter
+[".codacy.yaml".engines.spectral]
+enabled = true
+
+# Duplicated code detection
+[".codacy.yaml".engines.duplication]
+minTokenMatch = 50
+skipLexicalErrors = true
+ignoreLiterals = true
+ignoreIdentifiers = true
+ignoreAnnotations = true
+ignoreUsings = true
+exclude_paths = [
+    "test_*.py",
+    "tests/**"
+]
+
+[".codacy.yaml"]
+exclude_paths = [
+    "*.egg",
+    "*.egg-info/**",
+    ".eggs/**",
+    ".git/**",
+    ".tox/**",
+    ".venv/**",
+    "__pycache__/**",
+    "bin/**",
+    "build/**",
+    "dist/**",
+    # Test files
+    "test_*.py",
+    "tests/**"
+]

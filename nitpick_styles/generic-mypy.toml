@@ -1,0 +1,56 @@
+[nitpick.meta]
+name = "mypy"
+url = "https://mypy.readthedocs.io/en/stable/config_file.html"
+
+[nitpick.files.present]
+".mypy.ini" = "Create the file with the contents below"
+
+
+[nitpick.files.comma_separated_values]
+".mypy.ini" = [
+    "mypy.enable_error_code",
+    "mypy.disable_error_code",
+    "mypy.plugins",
+    "mypy.files",
+    "mypy.exclude",
+]
+
+
+
+[".mypy.ini".mypy]
+strict = true
+warn_unreachable = true
+
+# Not sure if needed:
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+enable_error_code = """\
+    ignore-without-code,\
+    truthy-bool,\
+    redundant-self,\
+    redundant-expr,\
+    possibly-undefined,\
+    truthy-iterable,\
+    unused-awaitable,\
+    unused-ignore,\
+    explicit-override,\
+    mutable-override,\
+    unimported-reveal,\
+    narrowed-type-not-subtype\
+"""
+
+plugins = """\
+    mypy_django_plugin.main,\
+    pydantic.mypy\
+"""
+
+enable_incomplete_feature = "NewGenericSyntax"
+
+
+
+## TODO(phuongfi91): This config section nested name is not supported by nitpick ini plugin
+#[".mypy.ini".mypy.plugins.django-stubs]
+#django_settings_module = "tests.settings"
