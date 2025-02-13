@@ -110,12 +110,6 @@ exclude = """\
 """
 
 
-## TODO(phuongfi91): This config section nested name is not supported by nitpick ini plugin
-#[".mypy.ini".mypy.plugins.django-stubs]
-## TODO(jhassine): Maybe remove this and let it read from DJANGO_SETTINGS_MODULE env var
-#django_settings_module = "config.settings.dev"
-
-
 [".mypy.ini".pydantic-mypy]
 # https://docs.pydantic.dev/latest/integrations/mypy/#configuring-the-plugin
 init_forbid_extra = true
@@ -126,5 +120,5 @@ warn_required_dynamic_aliases = true
 # ------------------
 # You can change some checks per module using this syntax
 # Ref: https://mypy.readthedocs.io/en/latest/config_file.html#example-mypy-ini
-#[".mypy.ini".mypy-mycode.foo."*"]
+#[".mypy.ini"."mypy-mycode.foo.*"]
 # Your custom options here

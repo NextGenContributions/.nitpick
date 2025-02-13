@@ -1,0 +1,22 @@
+[nitpick.meta]
+name = "Django project configs"
+url = "https://packaging.python.org/en/latest/specifications/pyproject-toml/"
+
+
+[nitpick.files.present]
+"pyproject.toml" = "Create the file with the contents below"
+
+
+# Dependency Groups
+["pyproject.toml".dependency-groups]
+dev = [
+    # typing
+    "django-stubs-ext>=5.1.1",
+    "django-stubs[compatible-mypy]>=5.1.1",
+
+    # linter & fomatter
+    "pylint-django>=2.6.1",
+
+    # test
+    "pytest-django>=4.9.0",
+]

@@ -42,15 +42,4 @@ enable_error_code = """\
     narrowed-type-not-subtype\
 """
 
-plugins = """\
-    mypy_django_plugin.main,\
-    pydantic.mypy\
-"""
-
 enable_incomplete_feature = "NewGenericSyntax"
-
-
-
-## TODO(phuongfi91): This config section nested name is not supported by nitpick ini plugin
-#[".mypy.ini".mypy.plugins.django-stubs]
-#django_settings_module = "tests.settings"

@@ -55,6 +55,7 @@ indent-width = 4
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
 select = ["ALL"]
+external = ["WPS", "C", "W"]
 ignore = [
   # Enforce removal of unused 'noqa' rule.
   # https://docs.astral.sh/ruff/linter/?query=RUF100#disabling-fixes
@@ -80,7 +81,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [".ruff.toml".lint.per-file-ignores]
 # Ignore assert usage in tests
-"tests/*.py" = ["S101"]
+"tests/**/test_*.py" = ["S101"]
 
 
 [".ruff.toml".lint.pydocstyle]
