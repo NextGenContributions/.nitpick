@@ -19,10 +19,10 @@ allow_zero_version = true
 no_git_verify = false
 tag_format = "v{version}"
 version_toml = ["pyproject.toml:project.version"]
-# TODO(phuongfi91): Find a pattern that doesn't rely on the project name.
+# TODO(phuongfi91): Utilize project-config util to put a constraint on this
 #version_variables = [
-#    "django2pydantic/__init__.py:__version__",
-#    "uv.lock:\"django2pydantic\"\\nversion",
+#    "project_name/__init__.py:__version__",
+#    "uv.lock:\"project_name\"\\nversion",
 #]
 
 ["pyproject.toml".tool.semantic_release.branches.main]
@@ -104,8 +104,6 @@ dev = [
     # typing
     "basedpyright>=1.21.0",
     "beartype>=0.19.0",
-    "django-stubs-ext>=5.1.1",
-    "django-stubs[compatible-mypy]>=5.1.1",
     "mypy>=1.13.0",
     "pyre-check>=0.9.23",
     "pyright>=1.1.388",
@@ -115,7 +113,6 @@ dev = [
     # linter & fomatter
     "import-linter>=2.1",
     "isort>=5.13.2",
-    "pylint-django>=2.6.1",
     "ruff>=0.7.3",
     "semgrep>=1.85.0",
     "wemake-python-styleguide>=1.0.0",
@@ -132,7 +129,6 @@ dev = [
     # test
     "hypothesis>=6.118.0",
     "pytest-cov>=6.0.0",
-    "pytest-django>=4.9.0",
     "pytest-instafail>=0.5.0",
     "pytest-testmon>=2.1.1",
     "pytest-watch>=4.2.0",

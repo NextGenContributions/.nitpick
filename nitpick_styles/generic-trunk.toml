@@ -1,0 +1,127 @@
+[nitpick.meta]
+name = "Trunk"
+url = "https://docs.trunk.io/cli/configuration#config-format"
+
+[nitpick.files.present]
+".trunk/trunk.yaml" = "Create the file with the contents below"
+".trunk/.gitignore" = "Create the file with the contents below"
+".trunk/configs/.markdownlint.yaml" = "Create the file with the contents below"
+".trunk/configs/.shellcheckrc" = "Create the file with the contents below"
+".trunk/configs/.yamllint.yaml" = "Create the file with the contents below"
+
+
+[nitpick.files.tags]
+".trunk/configs/.shellcheckrc" = ["text"]
+
+# ************************ ".trunk/trunk.yaml" ************************
+[".trunk/trunk.yaml"]
+# This file controls the behavior of Trunk: https://docs.trunk.io/cli
+# To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
+version = "0.1"
+
+[".trunk/trunk.yaml".cli]
+version = "1.22.9"
+
+# Trunk provides extensibility via plugins. (https://docs.trunk.io/plugins)
+[[".trunk/trunk.yaml".plugins.sources]]
+id = "trunk"
+ref = "v1.6.7"
+uri = "https://github.com/trunk-io/plugins"
+
+# Many linters and tools depend on runtimes - configure them here. (https://docs.trunk.io/runtimes)
+[".trunk/trunk.yaml".runtimes]
+enabled = [
+    "python@>=3.10.8",
+]
+
+# This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
+[".trunk/trunk.yaml".lint]
+enabled = [
+    "actionlint@1.7.7",
+    "bandit@1.8.2",
+    "git-diff-check",
+    "markdownlint@0.44.0",
+    "mypy@1.14.1",
+    "osv-scanner@1.9.2",
+    "prettier@3.4.2",
+    "pylint@3.3.4",
+    "renovate@39.141.0",
+    "ruff@0.9.3",
+    "shellcheck@0.10.0",
+    "shfmt@3.6.0",
+    "taplo@0.9.3",
+    "trufflehog@3.88.3",
+    "yamllint@1.35.1"
+]
+
+[[".trunk/trunk.yaml".lint.ignore]]
+linters = ["ALL"]
+paths = [
+    "*.egg",
+    "*.egg-info/**",
+    ".eggs/**",
+    ".git/**",
+    ".tox/**",
+    ".venv/**",
+    "__pycache__/**",
+    "bin/**",
+    "build/**",
+    "dist/**",
+    # Test files
+    "test_*.py",
+    "tests/**"
+]
+
+
+
+# ************************ ".trunk/.gitignore ************************
+[[".trunk/.gitignore".contains]]
+line = "*out"
+[[".trunk/.gitignore".contains]]
+line = "*logs"
+[[".trunk/.gitignore".contains]]
+line = "*actions"
+[[".trunk/.gitignore".contains]]
+line = "*notifications"
+[[".trunk/.gitignore".contains]]
+line = "*tools"
+[[".trunk/.gitignore".contains]]
+line = "plugins"
+[[".trunk/.gitignore".contains]]
+line = "user_trunk.yaml"
+[[".trunk/.gitignore".contains]]
+line = "user.yaml"
+[[".trunk/.gitignore".contains]]
+line = "tmp"
+
+
+
+# ************************ ".trunk/configs/.markdownlint.yaml" ************************
+[".trunk/configs/.markdownlint.yaml"]
+# Prettier friendly markdownlint config (all formatting rules disabled)
+extends = "markdownlint/style/prettier"
+
+
+
+# ************************ ".trunk/configs/.shellcheckrc" ************************
+[[".trunk/configs/.shellcheckrc".contains]]
+line = "enable=all"
+[[".trunk/configs/.shellcheckrc".contains]]
+line = "source-path=SCRIPTDIR"
+[[".trunk/configs/.shellcheckrc".contains]]
+line = "disable=SC2154"
+# If you're having issues with shellcheck following source, disable the errors via:
+# disable=SC1090
+# disable=SC1091
+
+
+
+# ************************ ".trunk/configs/.yamllint.yaml" ************************
+[".trunk/configs/.yamllint.yaml".rules.quoted-strings]
+required = "only-when-needed"
+extra-allowed = ["{|}"]
+
+[".trunk/configs/.yamllint.yaml".rules.octal-values]
+forbid-implicit-octal = true
+
+#[".trunk/configs/.yamllint.yaml".rules.key-duplicates]

@@ -15,7 +15,6 @@ default_stages = ["pre-commit"]
 # nitpick pre-commit hook
 [[".pre-commit-config.yaml".repos]]
 repo = "https://github.com/NextGenContributions/nitpick"
-rev = "v0.35.0"
 [[".pre-commit-config.yaml".repos.hooks]]
 id = "nitpick-check"
 [[".pre-commit-config.yaml".repos.hooks]]

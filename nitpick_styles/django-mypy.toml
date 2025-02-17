@@ -1,0 +1,124 @@
+[nitpick.meta]
+name = "Django mypy"
+url = "https://mypy.readthedocs.io/en/stable/config_file.html"
+
+[nitpick.files.present]
+".mypy.ini" = "Create the file with the contents below"
+
+
+[nitpick.files.comma_separated_values]
+".mypy.ini" = [
+    "mypy.enable_error_code",
+    "mypy.disable_error_code",
+    "mypy.plugins",
+    "mypy.files",
+    "mypy.exclude",
+]
+
+
+
+[".mypy.ini".mypy]
+# https://mypy.readthedocs.io/en/stable/config_file.html#confval-mypy_path
+mypy_path = "./out"
+
+# Configuring error messages:
+show_error_codes = true
+show_column_numbers = true
+
+# Configuring strictness:
+strict = true
+# Strict mode; enables the following flags:
+# --warn-unused-configs,
+# --disallow-any-generics,
+# --disallow-subclassing-any,
+# --disallow-untyped-calls,
+# --disallow-untyped-defs,
+# --disallow-incomplete-defs,
+# --check-untyped-defs,
+# --disallow-untyped-decorators,
+# --warn-redundant-casts,
+# --warn-unused-ignores,
+# --warn-return-any,
+# --no-implicit-reexport,
+# --strict-equality,
+# --extra-checks
+
+warn_unreachable = true
+disallow_any_unimported = true
+disallow_any_expr = false
+disallow_any_explicit = false
+
+
+# warn_unused_configs = true
+# warn_return_any = true
+# check_untyped_defs = true
+explicit_package_bases = true
+# warn_redundant_casts = true
+# disallow_any_generics = true
+# no_implicit_reexport = true
+# Require ignore comments to include error codes
+# https://docs.astral.sh/ruff/rules/blanket-type-ignore/#blanket-type-ignore-pgh003
+# https://mypy.readthedocs.io/en/stable/error_code_list2.html#check-that-type-ignore-include-an-error-code-ignore-without-code
+enable_error_code = """\
+    ignore-without-code,\
+    truthy-bool,\
+    redundant-self,\
+    redundant-expr,\
+    possibly-undefined,\
+    truthy-iterable,\
+    unused-awaitable,\
+    unused-ignore,\
+    explicit-override,\
+    mutable-override,\
+    unimported-reveal,\
+    narrowed-type-not-subtype\
+"""
+
+follow_imports_for_stubs = true
+
+# https://mypy.readthedocs.io/en/latest/error_code_list2.html#code-no-untyped-def
+# Disabling here in Mypy as Ruff is already handling this
+# https://docs.astral.sh/ruff/rules/missing-return-type-undocumented-public-function/
+# Ruff has the following benefits:
+# - Sometimes a fix available.
+# - Is having instant on type checking whereas Mypy is slow to notice the fix.
+# - Mypy is too verbose making the whole function red underlined and it's hard to see the actual code anymore.
+# - Furthermore we have the infer tools available which can help figuring out the right return type.
+disallow_untyped_defs = false
+
+# * no-untyped-def: mypy doesn't understand nested dict items' type, only recognizes them as object dict-item,
+# Ruff is already handling this as explained for "disallow_untyped_defs" section above ^
+disable_error_code = """\
+    no-untyped-def\
+"""
+
+plugins = """\
+    mypy_django_plugin.main,\
+    pydantic.mypy,\
+    mypy_drf_plugin.main\
+"""
+
+files = """\
+    .\
+"""
+
+#exclude = (out|typings)/
+
+# Exclude .pyi files:
+exclude = """\
+    .*\\.pyi\
+"""
+
+
+[".mypy.ini".pydantic-mypy]
+# https://docs.pydantic.dev/latest/integrations/mypy/#configuring-the-plugin
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+# Per-module options
+# ------------------
+# You can change some checks per module using this syntax
+# Ref: https://mypy.readthedocs.io/en/latest/config_file.html#example-mypy-ini
+#[".mypy.ini"."mypy-mycode.foo.*"]
+# Your custom options here
