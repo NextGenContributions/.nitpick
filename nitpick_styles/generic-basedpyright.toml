@@ -1,0 +1,507 @@
+[nitpick.meta]
+name = "basedpyright"
+url = "https://github.com/DetachHead/basedpyright"
+
+[nitpick.files.present]
+"pyrightconfig.json" = "Create the file with the contents below"
+
+
+
+# https://docs.basedpyright.com/v1.20.0/configuration/config-files
+# https://microsoft.github.io/pyright/#/configuration?id=main-configuration-options
+["pyrightconfig.json".contains_json]
+include = """
+  [ "." ]
+"""
+
+exclude = """
+  ["typings", "out", ".pyre", ".pytype", ".mypy_cache", "*.pyi"]
+"""
+
+ignore = """
+  ["**/*.pyi"]
+"""
+
+defineConstant = """
+  {
+    "DEBUG": true
+  }
+"""
+
+stubPath = """
+  "out"
+"""
+
+pythonVersion = """
+  "3.12"
+"""
+
+pythonPlatform = """
+  "Linux"
+"""
+
+extraPaths = """
+  [
+    "/usr/local/lib/python3.12/site-packages"
+  ]
+"""
+
+# Type Check Diagnostics Settings: https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
+# Below in the comments the default severity levels for each rule with the following type checking modes:
+# Off Basic Standard Strict
+# (https://microsoft.github.io/pyright/#/configuration?id=diagnostic-settings-defaults)
+
+# analyzeUnannotatedFunctions [boolean]: Analyze and report errors for functions and methods that have no type annotations for input parameters or return types. The default value for this setting is true.
+analyzeUnannotatedFunctions = """
+  true
+"""
+
+# strictParameterNoneValue [boolean]: PEP 484 indicates that when a function parameter is assigned a default value of None, its type should implicitly be Optional even if the explicit type is not. When enabled, this rule requires that parameter type annotations use Optional explicitly in this case. The default value for this setting is true.
+strictParameterNoneValue = """
+  true
+"""
+
+# enableTypeIgnoreComments [boolean]: PEP 484 defines support for "# type: ignore" comments. This switch enables or disables support for these comments. The default value for this setting is true. This does not affect "# pyright: ignore" comments.
+enableTypeIgnoreComments = """
+  true
+"""
+
+# disableBytesTypePromotions [boolean]: Disables legacy behavior where bytearray and memoryview are considered subtypes of bytes. PEP 688 deprecates this behavior, but this switch is provided to restore the older behavior. The default value for this setting is false.
+disableBytesTypePromotions = """
+  true
+"""
+
+# strictListInference [boolean]: When inferring the type of a list, use strict type assumptions. For example, the expression [1, 'a', 3.4] could be inferred to be of type list[Any] or list[int | str | float]. If this setting is true, it will use the latter (stricter) type. The default value for this setting is false.
+strictListInference = """
+  false
+"""
+
+# strictDictionaryInference [boolean]: When inferring the type of a dictionary's keys and values, use strict type assumptions. For example, the expression {'a': 1, 'b': 'a'} could be inferred to be of type dict[str, Any] or dict[str, int | str]. If this setting is true, it will use the latter (stricter) type. The default value for this setting is false.
+strictDictionaryInference = """
+  false
+"""
+
+# strictSetInference [boolean]: When inferring the type of a set, use strict type assumptions. For example, the expression {1, 'a', 3.4} could be inferred to be of type set[Any] or set[int | str | float]. If this setting is true, it will use the latter (stricter) type. The default value for this setting is false.
+strictSetInference = """
+  false
+"""
+
+# deprecateTypingAliases [boolean]: PEP 585 indicates that aliases to types in standard collections that were introduced solely to support generics are deprecated as of Python 3.9. This switch controls whether these are treated as deprecated. This applies only when pythonVersion is 3.9 or newer. The default value for this setting is false but may be switched to true in the future.
+deprecateTypingAliases = """
+  true
+"""
+
+# enableExperimentalFeatures [boolean]: Enables a set of experimental (mostly undocumented) features that correspond to proposed or exploratory changes to the Python typing standard. These features will likely change or be removed, so they should not be used except for experimentation purposes. The default value for this setting is false.
+enableExperimentalFeatures = """
+  false
+"""
+
+# reportMissingTypeStubs [boolean or string]: Generate or suppress diagnostics for imports that have no corresponding type stub file (either a typeshed file or a custom type stub). The type checker requires type stubs to do its best job at analysis. The default value for this setting is "none". Note that there is a corresponding quick fix for this diagnostics that let you generate custom type stub to improve editing experiences.
+reportMissingTypeStubs = """
+  "information"
+"""
+
+# reportMissingModuleSource [boolean or string]: Generate or suppress diagnostics for imports that have no corresponding source file. This happens when a type stub is found, but the module source file was not found, indicating that the code may fail at runtime when using this execution environment. Type checking will be done using the type stub. The default value for this setting is "warning".
+reportMissingModuleSource = """
+  "warning"
+"""
+
+# reportInvalidTypeForm [boolean or string]: Generate or suppress diagnostics for type annotations that use invalid type expression forms or are semantically invalid. The default value for this setting is "error".
+reportInvalidTypeForm = """
+  "error"
+"""
+
+# reportMissingImports [boolean or string]: Generate or suppress diagnostics for imports that have no corresponding imported python file or type stub file. The default value for this setting is "error".
+reportMissingImports = """
+  "error"
+"""
+
+# reportUndefinedVariable [boolean or string]: Generate or suppress diagnostics for undefined variables. The default value for this setting is "error".
+reportUndefinedVariable = """
+  "error"
+"""
+
+# reportAssertAlwaysTrue [boolean or string]: Generate or suppress diagnostics for assert statement that will provably always assert. This can be indicative of a programming error. The default value for this setting is "warning".
+reportAssertAlwaysTrue = """
+  "warning"
+"""
+
+# reportInvalidStringEscapeSequence [boolean or string]: Generate or suppress diagnostics for invalid escape sequences used within string literals. The Python specification indicates that such sequences will generate a syntax error in future versions. The default value for this setting is "warning".
+reportInvalidStringEscapeSequence = """
+  "warning"
+"""
+
+# reportInvalidTypeVarUse [boolean or string]: Generate or suppress diagnostics when a TypeVar is used inappropriately (e.g. if a TypeVar appears only once) within a generic function signature. The default value for this setting is "warning".
+reportInvalidTypeVarUse = """
+  "warning"
+"""
+
+# reportSelfClsParameterName [boolean or string]: Generate or suppress diagnostics for a missing or misnamed "self" parameter in instance methods and "cls" parameter in class methods. Instance methods in metaclasses (classes that derive from "type") are allowed to use "cls" for instance methods. The default value for this setting is "warning".
+reportSelfClsParameterName = """
+  "warning"
+"""
+
+# reportUnsupportedDunderAll [boolean or string]: Generate or suppress diagnostics for statements that define or manipulate __all__ in a way that is not allowed by a static type checker, thus rendering the contents of __all__ to be unknown or incorrect. Also reports names within the __all__ list that are not present in the module namespace. The default value for this setting is "warning".
+reportUnsupportedDunderAll = """
+  "warning"
+"""
+
+# reportUnusedExpression [boolean or string]: Generate or suppress diagnostics for simple expressions whose results are not used in any way. The default value for this setting is "none".
+reportUnusedExpression = """
+  "information"
+"""
+
+# reportWildcardImportFromLibrary [boolean or string]: Generate or suppress diagnostics for a wildcard import from an external library. The use of this language feature is highly discouraged and can result in bugs when the library is updated. The default value for this setting is "warning".
+reportWildcardImportFromLibrary = """
+  "warning"
+"""
+
+# reportAbstractUsage [boolean or string]: Generate or suppress diagnostics for the attempted instantiate an abstract or protocol class or use of an abstract method. The default value for this setting is "error".
+reportAbstractUsage = """
+  "error"
+"""
+
+# reportArgumentType [boolean or string]: Generate or suppress diagnostics for argument type incompatibilities when evaluating a call expression. The default value for this setting is "error".
+reportArgumentType = """
+  "warning"
+"""
+
+# reportAssertTypeFailure [boolean or string]: Generate or suppress diagnostics for a type mismatch detected by the typing.assert_type call. The default value for this setting is "error".
+reportAssertTypeFailure = """
+  "error"
+"""
+
+# reportAssignmentType [boolean or string]: Generate or suppress diagnostics for assignment type incompatibility. The default value for this setting is "error".
+reportAssignmentType = """
+  "warning"
+"""
+
+# reportAttributeAccessIssue [boolean or string]: Generate or suppress diagnostics related to attribute accesses. The default value for this setting is "error".
+reportAttributeAccessIssue = """
+  "warning"
+"""
+
+# reportCallIssue [boolean or string]: Generate or suppress diagnostics related to call expressions and arguments passed to a call target. The default value for this setting is "error".
+reportCallIssue = """
+  "warning"
+"""
+
+# reportGeneralTypeIssues [boolean or string]: Generate or suppress diagnostics for general type inconsistencies, unsupported operations, argument/parameter mismatches, etc. This covers all of the basic type-checking rules not covered by other rules. It does not include syntax errors. The default value for this setting is "error".
+reportGeneralTypeIssues = """
+  "error"
+"""
+
+# reportInconsistentOverload [boolean or string]: Generate or suppress diagnostics for an overloaded function that has overload signatures that are inconsistent with each other or with the implementation. The default value for this setting is "error".
+reportInconsistentOverload = """
+  "error"
+"""
+
+# reportIndexIssue [boolean or string]: Generate or suppress diagnostics related to index operations and expressions. The default value for this setting is "error".
+reportIndexIssue = """
+  "error"
+"""
+
+# reportInvalidTypeArguments [boolean or string]: Generate or suppress diagnostics for invalid type argument usage. The default value for this setting is "error".
+reportInvalidTypeArguments = """
+  "error"
+"""
+
+# reportNoOverloadImplementation [boolean or string]: Generate or suppress diagnostics for an overloaded function or method if the implementation is not provided. The default value for this setting is "error".
+reportNoOverloadImplementation = """
+  "error"
+"""
+
+# reportOperatorIssue [boolean or string]: Generate or suppress diagnostics related to the use of unary or binary operators (like * or not). The default value for this setting is "error".
+reportOperatorIssue = """
+  "error"
+"""
+
+# reportOptionalSubscript [boolean or string]: Generate or suppress diagnostics for an attempt to subscript (index) a variable with an Optional type. The default value for this setting is "error".
+reportOptionalSubscript = """
+  "error"
+"""
+
+# reportOptionalMemberAccess [boolean or string]: Generate or suppress diagnostics for an attempt to access a member of a variable with an Optional type. The default value for this setting is "error".
+reportOptionalMemberAccess = """
+  "warning"
+"""
+
+# reportOptionalCall [boolean or string]: Generate or suppress diagnostics for an attempt to call a variable with an Optional type. The default value for this setting is "error".
+reportOptionalCall = """
+  "error"
+"""
+
+# reportOptionalIterable [boolean or string]: Generate or suppress diagnostics for an attempt to use an Optional type as an iterable value (e.g. within a for statement). The default value for this setting is "error".
+reportOptionalIterable = """
+  "error"
+"""
+
+# reportOptionalContextManager [boolean or string]: Generate or suppress diagnostics for an attempt to use an Optional type as a context manager (as a parameter to a with statement). The default value for this setting is "error".
+reportOptionalContextManager = """
+  "error"
+"""
+
+# reportOptionalOperand [boolean or string]: Generate or suppress diagnostics for an attempt to use an Optional type as an operand to a unary operator (like ~ or not) or the left-hand operator of a binary operator (like *, ==, or). The default value for this setting is "error".
+reportOptionalOperand = """
+  "error"
+"""
+
+# reportRedeclaration [boolean or string]: Generate or suppress diagnostics for a symbol that has more than one type declaration. The default value for this setting is "error".
+reportRedeclaration = """
+  "error"
+"""
+
+# reportReturnType [boolean or string]: Generate or suppress diagnostics related to function return type compatibility. The default value for this setting is "error".
+reportReturnType = """
+  "error"
+"""
+
+# reportTypedDictNotRequiredAccess [boolean or string]: Generate or suppress diagnostics for an attempt to access a non-required field within a TypedDict without first checking whether it is present. The default value for this setting is "error".
+reportTypedDictNotRequiredAccess = """
+  "error"
+"""
+
+# reportPrivateImportUsage [boolean or string]: Generate or suppress diagnostics for use of a symbol from a "py.typed" module that is not meant to be exported from that module. The default value for this setting is "error".
+reportPrivateImportUsage = """
+  "error"
+"""
+
+# reportUnboundVariable [boolean or string]: Generate or suppress diagnostics for unbound variables. The default value for this setting is "error".
+reportUnboundVariable = """
+  "error"
+"""
+
+# reportUnhashable [boolean or string]: Generate or suppress diagnostics for the use of an unhashable object in a container that requires hashability. The default value for this setting is "error".
+reportUnhashable = """
+  "error"
+"""
+
+# reportUnusedCoroutine [boolean or string]: Generate or suppress diagnostics for call statements whose return value is not used in any way and is a Coroutine. This identifies a common error where an await keyword is mistakenly omitted. The default value for this setting is "error".
+reportUnusedCoroutine = """
+  "error"
+"""
+
+# reportUnusedExcept [boolean or string]: Generate or suppress diagnostics for an except clause that will never be reached. The default value for this setting is "error".
+reportUnusedExcept = """
+  "error"
+"""
+
+# reportFunctionMemberAccess [boolean or string]: Generate or suppress diagnostics for an attempt to access a member of a function or method. The default value for this setting is "error".
+reportFunctionMemberAccess = """
+  "warning"
+"""
+
+# reportIncompatibleMethodOverride [boolean or string]: Generate or suppress diagnostics for methods that override a method of the same name in a base class in an incompatible manner (wrong number of parameters, incompatible parameter types, or incompatible return type). The default value for this setting is "error".
+reportIncompatibleMethodOverride = """
+  "warning"
+"""
+
+# reportIncompatibleVariableOverride [boolean or string]: Generate or suppress diagnostics for class variable declarations that override a symbol of the same name in a base class with a type that is incompatible with the base class symbol type. The default value for this setting is "error".
+reportIncompatibleVariableOverride = """
+  "warning"
+"""
+
+# reportOverlappingOverload [boolean or string]: Generate or suppress diagnostics for function overloads that overlap in signature and obscure each other or have incompatible return types. The default value for this setting is "error".
+reportOverlappingOverload = """
+  "warning"
+"""
+
+# reportPossiblyUnboundVariable [boolean or string]: Generate or suppress diagnostics for variables that are possibly unbound on some code paths. The default value for this setting is "error".
+reportPossiblyUnboundVariable = """
+  "warning"
+"""
+
+# reportConstantRedefinition [boolean or string]: Generate or suppress diagnostics for attempts to redefine variables whose names are all-caps with underscores and numerals. The default value for this setting is "none".
+reportConstantRedefinition = """
+  "information"
+"""
+
+# reportDeprecated [boolean or string]: Generate or suppress diagnostics for use of a class or function that has been marked as deprecated. The default value for this setting is "none".
+reportDeprecated = """
+  "information"
+"""
+
+# reportDuplicateImport [boolean or string]: Generate or suppress diagnostics for an imported symbol or module that is imported more than once. The default value for this setting is "none".
+reportDuplicateImport = """
+  "information"
+"""
+
+# reportIncompleteStub [boolean or string]: Generate or suppress diagnostics for a module-level __getattr__ call in a type stub file, indicating that it is incomplete. The default value for this setting is "none".
+reportIncompleteStub = """
+  "information"
+"""
+
+# reportInconsistentConstructor [boolean or string]: Generate or suppress diagnostics when an __init__ method signature is inconsistent with a __new__ signature. The default value for this setting is "none".
+reportInconsistentConstructor = """
+  "information"
+"""
+
+# reportInvalidStubStatement [boolean or string]: Generate or suppress diagnostics for statements that are syntactically correct but have no purpose within a type stub file. The default value for this setting is "none".
+reportInvalidStubStatement = """
+  "information"
+"""
+
+# reportMatchNotExhaustive [boolean or string]: Generate or suppress diagnostics for a match statement that does not provide cases that exhaustively match against all potential types of the target expression. The default value for this setting is "none".
+reportMatchNotExhaustive = """
+  "information"
+"""
+
+# reportMissingParameterType [boolean or string]: Generate or suppress diagnostics for input parameters for functions or methods that are missing a type annotation. The self and cls parameters used within methods are exempt from this check. The default value for this setting is "none".
+reportMissingParameterType = """
+  "information"
+"""
+
+# reportMissingTypeArgument [boolean or string]: Generate or suppress diagnostics when a generic class is used without providing explicit or implicit type arguments. The default value for this setting is "none".
+reportMissingTypeArgument = """
+  "information"
+"""
+
+# reportPrivateUsage [boolean or string]: Generate or suppress diagnostics for incorrect usage of private or protected variables or functions. Protected class members begin with a single underscore ("_") and can be accessed only by subclasses. Private class members begin with a double underscore but do not end in a double underscore and can be accessed only within the declaring class. Variables and functions declared outside of a class are considered private if their names start with either a single or double underscore, and they cannot be accessed outside of the declaring module. The default value for this setting is "none".
+reportPrivateUsage = """
+  "information"
+"""
+
+# reportTypeCommentUsage [boolean or string]: Prior to Python 3.5, the grammar did not support type annotations, so types needed to be specified using "type comments". Python 3.5 eliminated the need for function type comments, and Python 3.6 eliminated the need for variable type comments. Future versions of Python will likely deprecate all support for type comments. If enabled, this check will flag any type comment usage unless it is required for compatibility with the specified language version. The default value for this setting is "none".
+reportTypeCommentUsage = """
+  "information"
+"""
+
+# reportUnknownArgumentType [boolean or string]: Generate or suppress diagnostics for call arguments for functions or methods that have an unknown type. The default value for this setting is "none".
+reportUnknownArgumentType = """
+  "information"
+"""
+
+# reportUnknownLambdaType [boolean or string]: Generate or suppress diagnostics for input or return parameters for lambdas that have an unknown type. The default value for this setting is "none".
+reportUnknownLambdaType = """
+  "information"
+"""
+
+# reportUnknownMemberType [boolean or string]: Generate or suppress diagnostics for class or instance members that have an unknown type.
+reportUnknownMemberType = """
+  "information"
+"""
+
+# reportUnknownParameterType [boolean or string]: Generate or suppress diagnostics for input or return parameters for functions or methods that have an unknown type. The default value for this setting is "none".
+reportUnknownParameterType = """
+  "information"
+"""
+
+# reportUnknownVariableType [boolean or string]: Generate or suppress diagnostics for variables that have an unknown type. The default value for this setting is "none".
+reportUnknownVariableType = """
+  "information"
+"""
+
+# reportUnnecessaryCast [boolean or string]: Generate or suppress diagnostics for cast calls that are statically determined to be unnecessary. Such calls are sometimes indicative of a programming error. The default value for this setting is "none".
+reportUnnecessaryCast = """
+  "information"
+"""
+
+# reportUnnecessaryComparison [boolean or string]: Generate or suppress diagnostics for == or != comparisons or other conditional expressions that are statically determined to always evaluate to False or True. Such comparisons are sometimes indicative of a programming error. The default value for this setting is "none".
+reportUnnecessaryComparison = """
+  "information"
+"""
+
+# reportUnnecessaryContains [boolean or string]: Generate or suppress diagnostics for in operations that are statically determined to always evaluate to False or True. Such operations are sometimes indicative of a programming error. The default value for this setting is "none".
+reportUnnecessaryContains = """
+  "information"
+"""
+
+# reportUnnecessaryIsInstance [boolean or string]: Generate or suppress diagnostics for isinstance or issubclass calls where the result is statically determined to be always true. Such calls are often indicative of a programming error. The default value for this setting is "none".
+reportUnnecessaryIsInstance = """
+  "information"
+"""
+
+# reportUnusedClass [boolean or string]: Generate or suppress diagnostics for classes that are defined but never used. The default value for this setting is "none".
+reportUnusedClass = """
+  "information"
+"""
+
+# reportUnusedImport [boolean or string]: Generate or suppress diagnostics for imports that are not used. The default value for this setting is "none".
+reportUnusedImport = """
+  "information"
+"""
+
+# reportUnusedFunction [boolean or string]: Generate or suppress diagnostics for functions that are defined but never used. The default value for this setting is "none".
+reportUnusedFunction = """
+  "information"
+"""
+
+# reportUnusedVariable [boolean or string]: Generate or suppress diagnostics for variables that are defined but never used. The default value for this setting is "none".
+reportUnusedVariable = """
+  "information"
+"""
+
+# reportUntypedBaseClass [boolean or string]: Generate or suppress diagnostics for base classes whose type cannot be determined statically. These obscure the class type, defeating many type analysis features. The default value for this setting is "none".
+reportUntypedBaseClass = """
+  "information"
+"""
+
+# reportUntypedClassDecorator [boolean or string]: Generate or suppress diagnostics for class decorators that have no type annotations. These obscure the class type, defeating many type analysis features. The default value for this setting is "none".
+reportUntypedClassDecorator = """
+  "information"
+"""
+
+# reportUntypedFunctionDecorator [boolean or string]: Generate or suppress diagnostics for function decorators that have no type annotations. These obscure the function type, defeating many type analysis features. The default value for this setting is "none".
+reportUntypedFunctionDecorator = """
+  "none"
+"""
+
+# reportUntypedNamedTuple [boolean or string]: Generate or suppress diagnostics when "namedtuple" is used rather than "NamedTuple". The former contains no type information, whereas the latter does. The default value for this setting is "none".
+reportUntypedNamedTuple = """
+  "information"
+"""
+
+# reportCallInDefaultInitializer [boolean or string]: Generate or suppress diagnostics for function calls, list expressions, set expressions, or dictionary expressions within a default value initialization expression. Such calls can mask expensive operations that are performed at module initialization time. The default value for this setting is "none".
+reportCallInDefaultInitializer = """
+  "information"
+"""
+
+# reportImplicitOverride [boolean or string]: Generate or suppress diagnostics for overridden methods in a class that are missing an explicit @override decorator. The default value for this setting is "none".
+reportImplicitOverride = """
+  "information"
+"""
+
+# reportImplicitStringConcatenation [boolean or string]: Generate or suppress diagnostics for two or more string literals that follow each other, indicating an implicit concatenation. This is considered a bad practice and often masks bugs such as missing commas. The default value for this setting is "none".
+reportImplicitStringConcatenation = """
+  "none"
+"""
+
+# reportImportCycles [boolean or string]: Generate or suppress diagnostics for import cycles. The default value for this setting is "none".
+reportImportCycles = """
+  "information"
+"""
+
+# reportMissingSuperCall [boolean or string]: Generate or suppress diagnostics for __init__, __init_subclass__, __enter__ and __exit__ methods in a subclass that fail to call through to the same-named method on a base class. The default value for this setting is "none".
+reportMissingSuperCall = """
+  "information"
+"""
+
+# reportPropertyTypeMismatch [boolean or string]: Generate or suppress diagnostics for property access that is inconsistent with the property type. The default value for this setting is "none".
+reportPropertyTypeMismatch = """
+  "information"
+"""
+
+# reportShadowedImports [boolean or string]: Generate or suppress diagnostics for files that are overriding a module in the stdlib. The default value for this setting is "none".
+reportShadowedImports = """
+  "information"
+"""
+
+# reportUninitializedInstanceVariable [boolean or string]: Generate or suppress diagnostics for instance variables within a class that are not initialized or declared within the class body or the __init__ method. The default value for this setting is "none".
+reportUninitializedInstanceVariable = """
+  "information"
+"""
+
+# reportUnnecessaryTypeIgnoreComment [boolean or string]: Generate or suppress diagnostics for a # type: ignore or # pyright: ignore comment that would have no effect if removed. The default value for this setting is "none".
+reportUnnecessaryTypeIgnoreComment = """
+  "information"
+"""
+
+# reportUnusedCallResult [boolean or string]: Generate or suppress diagnostics for call statements whose return value is not used in any way and is not None. The default value for this setting is "none".
+reportUnusedCallResult = """
+  "none"
+"""
+
+# reportUnreachable [boolean or string]: Generate or suppress diagnostics for statements that are determined to be unreachable based on static code flow analysis. The default value for this setting is "warning".
+reportUnreachable = """
+  "warning"
+"""
