@@ -5,13 +5,14 @@ url = "https://docs.trunk.io/cli/configuration#config-format"
 [nitpick.files.present]
 ".trunk/trunk.yaml" = "Create the file with the contents below"
 ".trunk/.gitignore" = "Create the file with the contents below"
-".trunk/configs/.markdownlint.yaml" = "Create the file with the contents below"
-".trunk/configs/.shellcheckrc" = "Create the file with the contents below"
-".trunk/configs/.yamllint.yaml" = "Create the file with the contents below"
+".markdownlint.yaml" = "Create the file with the contents below"
+".shellcheckrc" = "Create the file with the contents below"
+".yamllint.yaml" = "Create the file with the contents below"
+".vale.ini" = "Create the file with the contents below"
 
 
 [nitpick.files.tags]
-".trunk/configs/.shellcheckrc" = ["text"]
+".shellcheckrc" = ["text"]
 
 # ************************ ".trunk/trunk.yaml" ************************
 [".trunk/trunk.yaml"]
@@ -125,19 +126,19 @@ line = "tmp"
 
 
 
-# ************************ ".trunk/configs/.markdownlint.yaml" ************************
-[".trunk/configs/.markdownlint.yaml"]
+# ************************ ".markdownlint.yaml" ************************
+[".markdownlint.yaml"]
 # Prettier friendly markdownlint config (all formatting rules disabled)
 extends = "markdownlint/style/prettier"
 
 
 
-# ************************ ".trunk/configs/.shellcheckrc" ************************
-[[".trunk/configs/.shellcheckrc".contains]]
+# ************************ ".shellcheckrc" ************************
+[[".shellcheckrc".contains]]
 line = "enable=all"
-[[".trunk/configs/.shellcheckrc".contains]]
+[[".shellcheckrc".contains]]
 line = "source-path=SCRIPTDIR"
-[[".trunk/configs/.shellcheckrc".contains]]
+[[".shellcheckrc".contains]]
 line = "disable=SC2154"
 # If you're having issues with shellcheck following source, disable the errors via:
 # disable=SC1090
@@ -145,12 +146,22 @@ line = "disable=SC2154"
 
 
 
-# ************************ ".trunk/configs/.yamllint.yaml" ************************
-[".trunk/configs/.yamllint.yaml".rules.quoted-strings]
+# ************************ ".yamllint.yaml" ************************
+[".yamllint.yaml".rules.quoted-strings]
 required = "only-when-needed"
 extra-allowed = ["{|}"]
 
-[".trunk/configs/.yamllint.yaml".rules.octal-values]
+[".yamllint.yaml".rules.octal-values]
 forbid-implicit-octal = true
 
-#[".trunk/configs/.yamllint.yaml".rules.key-duplicates]
+#[".yamllint.yaml".rules.key-duplicates]
+
+
+
+# ************************ ".vale.ini" ************************
+[".vale.ini".formats]
+markdoc = "md"
+
+[".vale.ini"."*.md"]
+# 'BasedOnStyles' but made lowercase otherwise nitpick can't work properly
+basedonstyles = "Vale"
