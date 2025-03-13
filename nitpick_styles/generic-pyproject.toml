@@ -111,6 +111,7 @@ dev = [
     "typeguard>=4.4.1",
 
     # linter & fomatter
+    "pylint>=3.3.4",
     "import-linter>=2.1",
     "isort>=5.13.2",
     "ruff>=0.7.3",

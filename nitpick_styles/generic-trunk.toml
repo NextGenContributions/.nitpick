@@ -5,13 +5,14 @@ url = "https://docs.trunk.io/cli/configuration#config-format"
 [nitpick.files.present]
 ".trunk/trunk.yaml" = "Create the file with the contents below"
 ".trunk/.gitignore" = "Create the file with the contents below"
-".trunk/configs/.markdownlint.yaml" = "Create the file with the contents below"
-".trunk/configs/.shellcheckrc" = "Create the file with the contents below"
-".trunk/configs/.yamllint.yaml" = "Create the file with the contents below"
+".markdownlint.yaml" = "Create the file with the contents below"
+".shellcheckrc" = "Create the file with the contents below"
+".yamllint.yaml" = "Create the file with the contents below"
+".vale.ini" = "Create the file with the contents below"
 
 
 [nitpick.files.tags]
-".trunk/configs/.shellcheckrc" = ["text"]
+".shellcheckrc" = ["text"]
 
 # ************************ ".trunk/trunk.yaml" ************************
 [".trunk/trunk.yaml"]
@@ -19,53 +20,69 @@ url = "https://docs.trunk.io/cli/configuration#config-format"
 # To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version = "0.1"
 
-[".trunk/trunk.yaml".cli]
-version = "1.22.9"
-
 # Trunk provides extensibility via plugins. (https://docs.trunk.io/plugins)
 [[".trunk/trunk.yaml".plugins.sources]]
 id = "trunk"
-ref = "v1.6.7"
-uri = "https://github.com/trunk-io/plugins"
+ref = "main-ng"
+uri = "https://github.com/NextGenContributions/plugins"
 
 # Many linters and tools depend on runtimes - configure them here. (https://docs.trunk.io/runtimes)
 [".trunk/trunk.yaml".runtimes]
 enabled = [
     "python@>=3.10.8",
+    "go@>=1.21.0",
+    "node@>=18.20.5",
 ]
+[[".trunk/trunk.yaml".runtimes.definitions]]
+type = "python"
+system_version = "allowed"
+
 
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 [".trunk/trunk.yaml".lint]
 enabled = [
     "actionlint@1.7.7",
     "bandit@1.8.3",
-    "checkov@3.2.379",
+    "checkov@3.2.382",
     "codespell@2.4.1",
-    "cspell@8.17.5",
+    # Temporarily disabled until we have better solution for unknown words
+    # - "cspell@8.17.5",
     "djlint@1.36.4",
-    "flake8@7.1.2",
+    "flake8",
     "git-diff-check",
     "gitleaks@8.24.0",
     "hadolint@2.12.1-beta",
     "markdown-link-check@3.13.6",
     "markdown-table-prettify@3.6.0",
     "markdownlint-cli2@0.17.2",
-    "mypy@1.15.0",
+    "mypy",
     "osv-scanner@1.9.2",
     "prettier@3.5.3",
-    "pylint@3.3.4",
-    "pyright@1.1.396",
-    "renovate@39.185.0",
-    "ruff@0.9.9",
-    "semgrep@1.110.0",
+    "pylint",
+    "pyright",
+    "basedpyright",
+    "renovate@39.190.1",
+    "ruff",
     "shellcheck@0.10.0",
     "shfmt@3.6.0",
     "taplo@0.9.3",
-    "trivy@0.59.1",
-    "trufflehog@3.88.14",
+    "trivy@0.60.0",
+    "trufflehog@3.88.15",
     "vale@3.9.6",
-    "yamllint@1.35.1"
+    "yamllint@1.35.1",
 ]
+[[".trunk/trunk.yaml".lint.definitions]]
+name = "mypy"
+[[".trunk/trunk.yaml".lint.definitions.commands]]
+name = "lint"
+# Override mypy default command by adding '--no-incremental' flag, which is
+# needed to handle "AssertionError: Internal error: method must be called
+# on parsed file only" during trunk check run
+# Refs:
+# - https://github.com/python/mypy/issues/14521
+# - https://mypy.readthedocs.io/en/stable/command_line.html#incremental
+run = "mypy --no-incremental --ignore-missing-imports --follow-imports=silent --show-error-codes --show-column-numbers ${target}"
+
 
 [[".trunk/trunk.yaml".lint.ignore]]
 linters = ["ALL"]
@@ -109,19 +126,19 @@ line = "tmp"
 
 
 
-# ************************ ".trunk/configs/.markdownlint.yaml" ************************
-[".trunk/configs/.markdownlint.yaml"]
+# ************************ ".markdownlint.yaml" ************************
+[".markdownlint.yaml"]
 # Prettier friendly markdownlint config (all formatting rules disabled)
 extends = "markdownlint/style/prettier"
 
 
 
-# ************************ ".trunk/configs/.shellcheckrc" ************************
-[[".trunk/configs/.shellcheckrc".contains]]
+# ************************ ".shellcheckrc" ************************
+[[".shellcheckrc".contains]]
 line = "enable=all"
-[[".trunk/configs/.shellcheckrc".contains]]
+[[".shellcheckrc".contains]]
 line = "source-path=SCRIPTDIR"
-[[".trunk/configs/.shellcheckrc".contains]]
+[[".shellcheckrc".contains]]
 line = "disable=SC2154"
 # If you're having issues with shellcheck following source, disable the errors via:
 # disable=SC1090
@@ -129,12 +146,22 @@ line = "disable=SC2154"
 
 
 
-# ************************ ".trunk/configs/.yamllint.yaml" ************************
-[".trunk/configs/.yamllint.yaml".rules.quoted-strings]
+# ************************ ".yamllint.yaml" ************************
+[".yamllint.yaml".rules.quoted-strings]
 required = "only-when-needed"
 extra-allowed = ["{|}"]
 
-[".trunk/configs/.yamllint.yaml".rules.octal-values]
+[".yamllint.yaml".rules.octal-values]
 forbid-implicit-octal = true
 
-#[".trunk/configs/.yamllint.yaml".rules.key-duplicates]
+#[".yamllint.yaml".rules.key-duplicates]
+
+
+
+# ************************ ".vale.ini" ************************
+[".vale.ini".formats]
+markdoc = "md"
+
+[".vale.ini"."*.md"]
+# 'BasedOnStyles' but made lowercase otherwise nitpick can't work properly
+basedonstyles = "Vale"

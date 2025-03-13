@@ -65,7 +65,7 @@ exclude = """\
 # D401: Checks for docstring first lines that are not in an imperative mood.
 # X100: ???
 # W504: Line break occurred after a binary operator
-# E501: Line too long (Already covered by Ruff)
+# E501: Line too long. Should be handled by ruff
 ignore = """\
     D100,\
     D104,\
