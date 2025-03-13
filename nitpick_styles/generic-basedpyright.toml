@@ -504,9 +504,6 @@ reportUnreachable = """
 
 # The below ones are Basedpyright's new diagnostic rules
 # https://docs.basedpyright.com/latest/benefits-over-pyright/new-diagnostic-rules/:
-reportUnreachable = """
-  "warning"
-"""
 reportAny = """
   "none"
 """
