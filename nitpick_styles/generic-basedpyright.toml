@@ -15,9 +15,8 @@ include = """
 """
 
 exclude = """
-  ["typings", "out", ".pyre", ".pytype", ".mypy_cache", "*.pyi"]
+  ["typings", "out", ".pyre", ".pytype", ".mypy_cache", ".pytest_cache", ".hypothesis", ".venv", ".ruff_cache", "*.pyi", "**/.*", "**/__pycache__", "**/node_modules", ".git"]
 """
-
 ignore = """
   ["**/*.pyi"]
 """
@@ -26,10 +25,6 @@ defineConstant = """
   {
     "DEBUG": true
   }
-"""
-
-stubPath = """
-  "out"
 """
 
 pythonVersion = """
@@ -73,17 +68,17 @@ disableBytesTypePromotions = """
 
 # strictListInference [boolean]: When inferring the type of a list, use strict type assumptions. For example, the expression [1, 'a', 3.4] could be inferred to be of type list[Any] or list[int | str | float]. If this setting is true, it will use the latter (stricter) type. The default value for this setting is false.
 strictListInference = """
-  false
+  true
 """
 
 # strictDictionaryInference [boolean]: When inferring the type of a dictionary's keys and values, use strict type assumptions. For example, the expression {'a': 1, 'b': 'a'} could be inferred to be of type dict[str, Any] or dict[str, int | str]. If this setting is true, it will use the latter (stricter) type. The default value for this setting is false.
 strictDictionaryInference = """
-  false
+  true
 """
 
 # strictSetInference [boolean]: When inferring the type of a set, use strict type assumptions. For example, the expression {1, 'a', 3.4} could be inferred to be of type set[Any] or set[int | str | float]. If this setting is true, it will use the latter (stricter) type. The default value for this setting is false.
 strictSetInference = """
-  false
+  true
 """
 
 # deprecateTypingAliases [boolean]: PEP 585 indicates that aliases to types in standard collections that were introduced solely to support generics are deprecated as of Python 3.9. This switch controls whether these are treated as deprecated. This applies only when pythonVersion is 3.9 or newer. The default value for this setting is false but may be switched to true in the future.
@@ -443,7 +438,7 @@ reportUntypedClassDecorator = """
 
 # reportUntypedFunctionDecorator [boolean or string]: Generate or suppress diagnostics for function decorators that have no type annotations. These obscure the function type, defeating many type analysis features. The default value for this setting is "none".
 reportUntypedFunctionDecorator = """
-  "none"
+  "information"
 """
 
 # reportUntypedNamedTuple [boolean or string]: Generate or suppress diagnostics when "namedtuple" is used rather than "NamedTuple". The former contains no type information, whereas the latter does. The default value for this setting is "none".
@@ -493,15 +488,52 @@ reportUninitializedInstanceVariable = """
 
 # reportUnnecessaryTypeIgnoreComment [boolean or string]: Generate or suppress diagnostics for a # type: ignore or # pyright: ignore comment that would have no effect if removed. The default value for this setting is "none".
 reportUnnecessaryTypeIgnoreComment = """
-  "information"
+  "none"
 """
 
 # reportUnusedCallResult [boolean or string]: Generate or suppress diagnostics for call statements whose return value is not used in any way and is not None. The default value for this setting is "none".
 reportUnusedCallResult = """
-  "none"
+  "information"
 """
 
 # reportUnreachable [boolean or string]: Generate or suppress diagnostics for statements that are determined to be unreachable based on static code flow analysis. The default value for this setting is "warning".
 reportUnreachable = """
+  "warning"
+"""
+
+
+# The below ones are Basedpyright's new diagnostic rules
+# https://docs.basedpyright.com/latest/benefits-over-pyright/new-diagnostic-rules/:
+reportUnreachable = """
+  "warning"
+"""
+reportAny = """
+  "none"
+"""
+reportExplicitAny = """
+  "warning"
+"""
+reportIgnoreCommentWithoutRule = """
+  "warning"
+"""
+reportPrivateLocalImportUsage = """
+  "warning"
+"""
+reportImplicitRelativeImport = """
+  "warning"
+"""
+reportInvalidCast = """
+  "warning"
+"""
+reportUnsafeMultipleInheritance = """
+  "warning"
+"""
+reportUnusedParameter = """
+  "warning"
+"""
+reportImplicitAbstractClass = """
+  "warning"
+"""
+reportUnannotatedClassAttribute = """
   "warning"
 """
