@@ -15,7 +15,22 @@ include = """
 """
 
 exclude = """
-  ["typings", "out", ".pyre", ".pytype", ".mypy_cache", ".pytest_cache", ".hypothesis", ".venv", ".ruff_cache", "*.pyi", "**/.*", "**/__pycache__", "**/node_modules", ".git"]
+  [
+    "typings",
+    "out",
+    ".pyre",
+    ".pytype",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".hypothesis",
+    ".venv",
+    ".ruff_cache",
+    "*.pyi",
+    "**/.*",
+    "**/__pycache__",
+    "**/node_modules",
+    ".git"
+  ]
 """
 ignore = """
   ["**/*.pyi"]
