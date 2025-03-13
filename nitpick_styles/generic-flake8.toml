@@ -186,10 +186,13 @@ max-try-body-length = 9
 # WPS218: Found too many `assert` statements
 #   https://wemake-python-styleguide.readthedocs.io/en/latest/pages/usage/violations/complexity.html#wemake_python_styleguide.violations.complexity.TooManyAssertsViolation
 #   Well, tests are about asserts, everywhere else they are bad and should not be relied on prod optimized pythons
+# WPS226: Forbid the overuse of string literals
+#   https://wemake-python-styleguide.readthedocs.io/en/1.0.0/pages/usage/violations/complexity.html#wemake_python_styleguide.violations.complexity.OverusedStringViolation
 # WPS432: Enable magic numbers for tests
 "tests/*.py" = """\
     WPS116,\
     WPS118,\
     WPS218,\
+    WPS226,\
     WPS432\
 """
