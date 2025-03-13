@@ -1,0 +1,33 @@
+[nitpick.meta]
+name = "pyre"
+url = "https://github.com/facebook/pyre-check"
+
+[nitpick.files.present]
+".pyre_configuration" = "Create the file with the contents below"
+".watchmanconfig" = "Create the file with the contents below"
+
+[nitpick.files.tags]
+".pyre_configuration" = ["text", "json"]
+".watchmanconfig" = ["text"]
+
+
+
+# https://pyre-check.org/docs/configuration/
+[".pyre_configuration".contains_json]
+site_package_search_strategy = """
+    "all"
+"""
+source_directories = """
+  [ "." ]
+"""
+strict = """
+    true
+"""
+python_version = """
+    "3.12"
+"""
+
+
+# Just an empty json file is enough for pyre
+[[".watchmanconfig".contains]]
+line = "{}"
