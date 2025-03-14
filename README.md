@@ -68,7 +68,7 @@ Here in the instructions we use [uv](https://docs.astral.sh/uv/) as it is our ch
 To install using `uv`:
 
 ```shell
-uv add git+https://github.com/NextGenContributions/nitpick#develop-ng --branch develop-ng --group dev
+uv add git+https://github.com/NextGenContributions/nitpick#develop-ng --rev develop-ng --group dev
 ```
 
 #### Important note
