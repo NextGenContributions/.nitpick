@@ -51,6 +51,8 @@ style = [
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-pre-commit-hooks.toml",
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-pylintrc.toml",
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-pyproject.toml",
+    "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-basedpyright.toml",
+    "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-pyre.toml",
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-ruff.toml",
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-taplo.toml",
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-trunk.toml",
