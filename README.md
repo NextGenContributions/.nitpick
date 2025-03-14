@@ -103,7 +103,7 @@ nitpick fix
 
 Verify the changes and fix by hand if something strange happened to your configs.
 
-If you encounter something that does not work as expected, you can open a ticket in the [issue tracker](https://github.com/NextGenContributions/nitpick/issues).
+If you encounter something that does not work as expected when you ran `nitpick fix`, you can open a ticket in the [issue tracker](https://github.com/NextGenContributions/nitpick/issues).
 
 ## Pre-commit hooks
 
