@@ -75,7 +75,7 @@ uv add git+https://github.com/NextGenContributions/nitpick#develop-ng --branch d
 
 We used above our public fork of the original `nitpick` repo, as the original  `nitpick` is not very well maintained and have many open issues and bugs.
 
-In our own fork we have fixed some bugs and make it work the way we expect it to work. Despite our efforts, there are still plenty of issues with it. It's recommended to go through the list of issues here https://github.com/NextGenContributions/nitpick/issues and workaround them as needed while modifying the configs in your project to avoid surprises.
+In our own fork we have fixed some bugs and make it work the way we expect it to work. Despite our efforts, there are still plenty of issues with it. It's recommended to go through the [list of issues](https://github.com/NextGenContributions/nitpick/issues) and workaround them as needed while modifying the configs in your project to avoid surprises.
 
 ### Sync configs from nitpick
 
