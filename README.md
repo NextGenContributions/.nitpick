@@ -8,7 +8,7 @@ We have done great effort to make sure the liners and type checkers work great:
 
 - Use very strict settings (we like it strict as long as they are relevant)
 - Disabled some rules that produce false alarms.
-- Disabled rules that are redundant and handled better by another linter. For example, when `Ruff` has the rule, we use it as `Ruff` is fast and can do linting real-time in the IDE (in VScode for example) and the user does not need to save the file to see the results.
+- Disabled rules that are redundant and handled better by another linter. For example, when `Ruff` has the rule, we use it then only from `Ruff` as it is fast and can do linting real-time in the IDE (in VScode for example) and the user does not need to save the file to see the results.
 - Disabled some conflicting rules. For example, we use Ruff as the authority, if some other linter have conflicting rule, we disable it from that linter. 
 
 ## Installation and usage
