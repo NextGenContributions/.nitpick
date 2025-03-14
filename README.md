@@ -59,7 +59,7 @@ The original  `nitpick` is not very well maintained and despite our efforts, the
 ### Sync configs from nitpick
 
 ```
-nitpick --fix
+nitpick fix
 ```
 
 ### Install any new packages
