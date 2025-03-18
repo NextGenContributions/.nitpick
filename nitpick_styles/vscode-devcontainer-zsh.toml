@@ -1,0 +1,18 @@
+[nitpick.meta]
+name = "vscode"
+url = "https://github.com/microsoft/vscode"
+
+[nitpick.files.present]
+".devcontainer/devcontainer.json" = "Create the file with the contents below"
+
+
+
+# https://microsoft.github.io/pyright/#/configuration?id=main-configuration-options
+[".devcontainer/devcontainer.json".contains_json]
+"mounts" = """
+    [
+      "source=${localEnv:HOME}/.zshrc,target=/root/.zshrc,type=bind,readonly",
+      "source=${localEnv:HOME}/.oh-my-zsh,target=/root/.oh-my-zsh,type=bind,readonly",
+      "source=${localEnv:HOME}/.p10k.zsh,target=/root/.p10k.zsh,type=bind,readonly",
+    ]
+"""
