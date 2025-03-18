@@ -8,7 +8,7 @@ url = "https://github.com/facebook/pyre-check"
 
 [nitpick.files.tags]
 ".pyre_configuration" = ["text", "json"]
-".watchmanconfig" = ["text"]
+".watchmanconfig" = ["text", "json"]
 
 
 
@@ -29,5 +29,9 @@ python_version = """
 
 
 # Just an empty json file is enough for pyre
-[[".watchmanconfig".contains]]
-line = "{}"
+[".watchmanconfig".contains_json]
+ignore_dirs = """
+    [
+        "placeholder_to_avoid_empty_file_which_nitpick_does_not_support"
+    ]
+"""
