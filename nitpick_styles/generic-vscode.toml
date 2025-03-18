@@ -1,0 +1,152 @@
+[nitpick.meta]
+name = "vscode"
+url = "https://github.com/microsoft/vscode"
+
+[nitpick.files.present]
+".devcontainer/devcontainer.json" = "Create the file with the contents below"
+
+
+
+# https://microsoft.github.io/pyright/#/configuration?id=main-configuration-options
+[".devcontainer/devcontainer.json".contains_json]
+"containerEnv" = """
+   {
+     "PROMPT_COMMAND": "history -a",
+     "HISTFILE": "/commandhistory"
+   }
+"""
+
+"mounts" = """
+    [
+      "source=${localEnv:HOME}/.zshrc,target=/root/.zshrc,type=bind,readonly",
+      "source=${localEnv:HOME}/.oh-my-zsh,target=/root/.oh-my-zsh,type=bind,readonly",
+      "source=${localEnv:HOME}/.p10k.zsh,target=/root/.p10k.zsh,type=bind,readonly",
+      "source=devcontainer-shell-history,target=/commandhistory,type=volume",
+      "source=python-shell-history,target=/root/.python_history,type=volume"
+    ]
+"""
+
+"customizations" = """
+   {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "ms-python.vscode-python",
+        "ms-python.isort",
+        "ms-python.mypy-type-checker",
+        "ms-python.flake8",
+        "asciidoctor.asciidoctor-vscode",
+        "eamodio.gitlens",
+        "fb-pyre-check.pyre-vscode",
+        "charliermarsh.ruff",
+        "ms-python.pylint",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github",
+        "github.vscode-github-actions",
+        "Semgrep.semgrep",
+        "SonarSource.sonarlint-vscode",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "DavidAnson.vscode-markdownlint",
+        "detachhead.basedpyright"
+      ],
+      "settings": {
+        "files.autoSave": "onFocusChange",
+        "editor.trimAutoWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "files.trimTrailingWhitespaceInRegexAndStrings": true,
+        "terminal.integrated.suggest.enabled": true,
+        "github.copilot.advanced": {
+          "useLanguageServer": true
+        },
+        "github.copilot.editor.enableAutoCompletions": true,
+        "github.copilot.chat.agent.runTasks": true,
+        "github.copilot.chat.followUps": "always",
+        "github.copilot.editor.enableCodeActions": true,
+        "github.copilot.chat.codesearch.enabled": true,
+        "github.copilot.chat.copilotDebugCommand.enabled": true,
+        "github.copilot.chat.reviewSelection.enabled": true,
+        "github.copilot.nextEditSuggestions.enabled": true,
+        "github.copilot.chat.edits.suggestRelatedFilesForTests": true,
+        "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": true,
+        "github.copilot.chat.generateTests.codeLens": true,
+        "github.copilot.chat.search.semanticTextResults": true,
+        "github.copilot.chat.setupTests.enabled": true,
+        "python.analysis.aiCodeActions": {
+          "generateDocstring": true,
+          "generateSymbol": true,
+          "implementAbstractClasses": true
+        },
+        "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+        "github.copilot.chat.codeGeneration.instructions": [],
+        "github.copilot.chat.reviewSelection.instructions": [],
+        "github.copilot.chat.testGeneration.instructions": [],
+        "github.copilot.chat.commitMessageGeneration.instructions": [
+          {
+            "text": "Use conventional commit message format."
+          },
+          {
+            "text": "Use the multi-part message body to describe the changes made in the commit."
+          }
+        ],
+        "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [],
+        "python.defaultInterpreterPath": "/usr/local/bin/python3.12",
+        "python.analysis.inlayHints.callArgumentNames": "all",
+        "python.analysis.inlayHints.functionReturnTypes": true,
+        "python.analysis.inlayHints.pytestParameters": true,
+        "python.analysis.inlayHints.variableTypes": true,
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.importFormat": "absolute",
+        "python.analysis.completeFunctionParens": true,
+        "python.analysis.generateWithTypeAnnotation": true,
+        "python.analysis.languageServerMode": "full",
+        "python.testing.pytestEnabled": true,
+        "python.analysis.packageIndexDepths": [
+          {
+            "name": "fastapi",
+            "depth": 3
+          }
+        ],
+        "[python]": {
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+          },
+          "editor.defaultFormatter": "charliermarsh.ruff"
+        },
+        "pylint.enabled": true,
+        "pylint.importStrategy": "fromEnvironment",
+        "pylint.severity": {
+          "refactor": "Information"
+        },
+        "flake8.enabled": true,
+        "flake8.importStrategy": "fromEnvironment",
+        "mypy-type-checker.preferDaemon": true,
+        "mypy-type-checker.importStrategy": "fromEnvironment",
+        "semgrep.scan.pro_intrafile": false,
+        "sonarlint.analysisExcludesStandalone": "**/*.pyi,*.pyi,.*/**",
+        "gitlens.telemetry.enabled": false,
+        "sonarlint.disableTelemetry": true,
+        "redhat.telemetry.enabled": false,
+        "editor.experimental.treeSitterTelemetry": false,
+        "testing.coverageToolbarEnabled": true,
+        "testing.defaultGutterClickAction": "runWithCoverage",
+        "testing.showCoverageInExplorer": true,
+        "basedpyright.analysis.autoImportCompletions": true,
+        "basedpyright.analysis.autoSearchPaths": true,
+        "basedpyright.analysis.inlayHints.callArgumentNames": true,
+        "basedpyright.analysis.inlayHints.functionReturnTypes": true,
+        "basedpyright.analysis.inlayHints.genericTypes": true,
+        "basedpyright.analysis.inlayHints.variableTypes": true,
+        "basedpyright.analysis.useLibraryCodeForTypes": true,
+        "basedpyright.disableLanguageServices": true,
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  }
+"""
