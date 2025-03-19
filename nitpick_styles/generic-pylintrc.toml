@@ -72,6 +72,7 @@ disable = [
     "E0603",  # undefined-all-variable
     "E0602",  # undefined-variable
     "E0302",  # unexpected-special-method-signature
+    "E0601",  # used-before-assignment
     "E0118",  # used-prior-global-declaration
     "E1700",  # yield-inside-async-function
     "E0105",  # yield-outside-function
@@ -80,6 +81,7 @@ disable = [
     "W0199",  # assert-on-tuple
     "W3201",  # bad-dunder-name
     "W1302",  # bad-format-string
+    "W0311",  # bad-indentation
     "W1501",  # bad-open-mode
     "W0211",  # bad-staticmethod-argument
     "W0702",  # bare-except
@@ -135,6 +137,7 @@ disable = [
     "W0245",  # super-without-brackets
     "W0706",  # try-except-raise
     "W0012",  # unknown-option-value
+    "W2301",  # unnecessary-ellipsis
     "W0108",  # unnecessary-lambda
     "W0107",  # unnecessary-pass
     "W0301",  # unnecessary-semicolon
@@ -232,9 +235,9 @@ disable = [
     "R0915",  # too-many-statements
     "R1707",  # trailing-comma-tuple
     "R1721",  # unnecessary-comprehension
-    "R1733",  # unnecessary-dict-index-lookup
-    "R1736",  # unnecessary-list-index-lookup
     "R1729",  # use-a-generator
+    "R1733",  # unnecessary-dict-index-lookup
+    "R1734",  # use-list-literal
     "R1735",  # use-dict-literal
     "R1734",  # use-list-literal
     "R6201",  # use-set-for-membership
