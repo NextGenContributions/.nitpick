@@ -12,6 +12,10 @@ exclude = '^docs/|/migrations/|devcontainer.json'
 fail_fast = false
 default_stages = ["pre-commit"]
 
+# explicitly state the lookup key for a yaml list
+[".pre-commit-config.yaml".__list_keys]
+repos = "repo"  # 'repo' is the key to identify an item in 'repos' list
+
 # nitpick pre-commit hook
 [[".pre-commit-config.yaml".repos]]
 repo = "https://github.com/NextGenContributions/nitpick"

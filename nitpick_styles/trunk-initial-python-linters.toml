@@ -1,0 +1,46 @@
+# To be used to enable trunk linters for the first `nitpick fix` run only, remove this style after the first run
+# Read more at https://github.com/NextGenContributions/.nitpick/issues/8
+[nitpick.meta]
+name = "Trunk"
+url = "https://docs.trunk.io/cli/configuration#config-format"
+
+[nitpick.files.present]
+".trunk/trunk.yaml" = "Create the file with the contents below"
+
+
+# ************************ ".trunk/trunk.yaml" ************************
+[".trunk/trunk.yaml"]
+# This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
+[".trunk/trunk.yaml".lint]
+enabled = [
+    # Temporarily disabled until we have better solution for unknown words
+    # "cspell@8.17.5",
+
+    "actionlint@1.7.7",
+    "bandit@1.8.3",
+    "checkov@3.2.382",
+    "codespell@2.4.1",
+    "djlint@1.36.4",
+    "flake8",
+    "git-diff-check",
+    "gitleaks@8.24.0",
+    "hadolint@2.12.1-beta",
+    "markdown-link-check@3.13.6",
+    "markdown-table-prettify@3.6.0",
+    "markdownlint-cli2@0.17.2",
+    "mypy",
+    "osv-scanner@1.9.2",
+    "prettier@3.5.3",
+    "pylint",
+    "pyright",
+    "basedpyright",
+    "renovate@39.190.1",
+    "ruff",
+    "shellcheck@0.10.0",
+    "shfmt@3.6.0",
+    "taplo@0.9.3",
+    "trivy@0.60.0",
+    "trufflehog@3.88.15",
+    "vale@3.9.6",
+    "yamllint@1.35.1",
+]
