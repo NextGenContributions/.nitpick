@@ -66,6 +66,8 @@ ignore = [
   # ...so:
   "COM812",
   "ISC001",
+  # We use "TODO" comments as a form of documentation and link issue
+  "FIX002",
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided:
