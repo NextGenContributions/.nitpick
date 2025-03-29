@@ -6,6 +6,14 @@ We use `nitpick` tool to sync the settings from this shared repo to other projec
 
 ## What is included in the shared configs
 
+### VScode
+
+For VSCode:
+
+- devcontainer configuration
+
+### Python type checkers and linters
+
 Python linters and type checkers configuration for:
 
 - Ruff
@@ -56,12 +64,14 @@ style = [
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-ruff.toml",
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-taplo.toml",
     "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-trunk.toml",
+    "github://NextGenContributions/.nitpick@main/nitpick_styles/generic-vscode.toml",
+    "github://NextGenContributions/.nitpick@main/nitpick_styles/vscode-devcontainer-zsh.toml",
 ]
 # We don't really care about caching as it should be rather quick to fetch anyway, this ensures fresh configs
 cache = "never"
 ```
 
-Typically, a Django project should include all the generic styles as well as the django specific ones. A generic project should include only the generic styles.
+Typically, a Django project should include all the generic styles as well as the Django specific ones. A generic project should include only the generic styles.
 
 ### Install nitpick
 
