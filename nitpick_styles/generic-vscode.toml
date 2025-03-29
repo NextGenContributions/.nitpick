@@ -3,12 +3,17 @@ name = "vscode"
 url = "https://github.com/microsoft/vscode"
 
 [nitpick.files.present]
-".devcontainer/devcontainer.json" = "Create the file with the contents below"
+".devcontainer/ngc/devcontainer.json" = "Create the file with the contents below"
 
 
 
 # https://microsoft.github.io/pyright/#/configuration?id=main-configuration-options
-[".devcontainer/devcontainer.json".contains_json]
+[".devcontainer/ngc/devcontainer.json".contains_json]
+
+"name" = "NGC Python 3"
+
+"image" = "ghcr.io/nextgencontributions/python-dev-image"
+ 
 "containerEnv" = """
    {
      "PROMPT_COMMAND": "history -a",
@@ -30,7 +35,6 @@ url = "https://github.com/microsoft/vscode"
         "ms-python.python",
         "ms-azuretools.vscode-docker",
         "ms-python.vscode-python",
-        "ms-python.isort",
         "ms-python.mypy-type-checker",
         "ms-python.flake8",
         "asciidoctor.asciidoctor-vscode",
