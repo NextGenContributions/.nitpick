@@ -66,6 +66,7 @@ exclude = """\
 # X100: ???
 # W504: Line break occurred after a binary operator
 # E501: Line too long. Should be handled by ruff
+# E704: multiple statements on one line (def). When using ellipsis (...) with methods, Ruff formats them single line and then this rule triggers. 
 ignore = """\
     D100,\
     D104,\
@@ -73,7 +74,8 @@ ignore = """\
     D401,\
     X100,\
     W504,\
-    E501\
+    E501,\
+    E704\
 """
 
 
