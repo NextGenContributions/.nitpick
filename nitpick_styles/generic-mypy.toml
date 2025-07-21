@@ -16,10 +16,10 @@ url = "https://mypy.readthedocs.io/en/stable/config_file.html"
 ]
 
 
-
 [".mypy.ini".mypy]
 strict = true
 warn_unreachable = true
+exclude_gitignore = true
 
 # Not sure if needed:
 check_untyped_defs = true
