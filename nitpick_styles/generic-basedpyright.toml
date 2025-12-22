@@ -491,11 +491,6 @@ reportPropertyTypeMismatch = """
   "information"
 """
 
-# reportShadowedImports [boolean or string]: Generate or suppress diagnostics for files that are overriding a module in the stdlib. The default value for this setting is "none".
-reportShadowedImports = """
-  "information"
-"""
-
 # reportUninitializedInstanceVariable [boolean or string]: Generate or suppress diagnostics for instance variables within a class that are not initialized or declared within the class body or the __init__ method. The default value for this setting is "none".
 reportUninitializedInstanceVariable = """
   "information"
